@@ -1,6 +1,6 @@
 [project]
 name = "tplink-deco-mcp-server"
-version = "0.0.0"
+version = "1.0.0"
 description = "MCP server exposing TP-Link Deco mesh routers (nodes, clients, Wi-Fi, blocklist, fixed IPs) as tools for LLM clients"
 readme = "README.md"
 requires-python = ">=3.14"
