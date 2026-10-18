@@ -13,20 +13,6 @@ and as a Docker image at `ghcr.io/roquerodrigo/tplink-deco-mcp-server`.
 **Read `CODE_STYLE.md` before adding or restructuring code** — naming, typing,
 docstrings, logging, error format, commit conventions and releasing live there.
 
-## Structure
-
-- `router/` — `RouterSettings` (env → settings), `RouterSession` (the single
-  authenticated `DecoClient`, behind a lock) and `router_failure.py` (which SDK
-  errors mean "session dropped", and how failures are phrased).
-- `summaries/` — pydantic models the tools return; they decide what the model
-  sees (field names, units, descriptions) and keep SDK shapes out of the
-  contract.
-- `tools/` — one class per router feature (`MeshTools`, `InternetTools`,
-  `WifiTools`, `ClientTools`, `BlocklistTools`, `AddressReservationTools`). Each
-  method is a tool; `register()` publishes them through `register_tool`.
-- `server.py` builds the `MCPServer` (instructions, tool groups, `/healthz`);
-  `cli.py` is the `tplink-deco-mcp-server` entry point.
-
 ## Run / verify
 
 ```sh
@@ -73,6 +59,9 @@ ghcr tagged `<version>`, `<major>.<minor>`, `<major>` and `latest`.
   therefore cost one extra login when something else took the session in
   between. Don't "fix" this by logging in per call: that evicts everyone else
   on every request.
+- **Tools return the pydantic models in `summaries/`, never SDK objects.** The
+  models decide what the model sees (field names, units, descriptions) and keep
+  SDK shapes out of the contract.
 - **Never write to stdout.** Over stdio, stdout is the JSON-RPC stream. Logging
   is configured to stderr in `cli.py`.
 - **Tool descriptions are the method docstrings** (`inspect.cleandoc`), and
