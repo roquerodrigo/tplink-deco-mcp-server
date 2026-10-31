@@ -13,6 +13,11 @@ from .internet_status_summary import (
 )
 from .node_summary import NodeSummary
 from .performance_summary import PerformanceSummary
+from .system_log_summary import (
+    SeveritySummary,
+    SystemLogEntrySummary,
+    SystemLogSummary,
+)
 from .wifi_configuration_summary import (
     WifiConfigurationSummary,
     WifiNetworkSummary,
@@ -29,6 +34,9 @@ __all__ = [
     "LanAddressSummary",
     "NodeSummary",
     "PerformanceSummary",
+    "SeveritySummary",
+    "SystemLogEntrySummary",
+    "SystemLogSummary",
     "WanAddressSummary",
     "WifiConfigurationSummary",
     "WifiNetworkSummary",

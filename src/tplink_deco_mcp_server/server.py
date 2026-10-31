@@ -14,6 +14,7 @@ from .tools import (
     ClientTools,
     InternetTools,
     MeshTools,
+    SystemLogTools,
     WifiTools,
 )
 
@@ -31,8 +32,8 @@ This MCP provides access to a TP-Link Deco mesh Wi-Fi network on the local netwo
 
 Use it when the user asks about their home network, Wi-Fi, router, internet connection, or the \
 devices connected to it: who is online, which device uses bandwidth, which IP a device has, \
-renaming devices, blocking a device from the internet, reserving a fixed IP, or diagnosing an \
-outage.
+renaming devices, blocking a device from the internet, reserving a fixed IP, reading the \
+router's system log, or diagnosing an outage.
 
 Devices are identified by MAC address. When the user names a device, call `list_clients` first \
 to resolve its MAC. Tools that change settings apply immediately on the router.\
@@ -51,6 +52,7 @@ def build_server(router: RouterSession) -> MCPServer[None]:
         ClientTools(router),
         BlocklistTools(router),
         AddressReservationTools(router),
+        SystemLogTools(router),
     )
     for tool_group in tool_groups:
         tool_group.register(server)

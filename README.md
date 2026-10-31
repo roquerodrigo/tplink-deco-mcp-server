@@ -18,6 +18,7 @@ SDK — no cloud account involved.
 | `list_deco_nodes` | Deco units of the mesh: model, role, IP, firmware, internet status, backhaul signal. |
 | `get_router_performance` | Gateway CPU and memory usage, online clients and total traffic right now. |
 | `get_internet_status` | WAN cable, IPv4/IPv6 connection state, public address, gateway and DNS. |
+| `get_system_log` | One page of the router's system log (newest by default): time, facility, level, process and message, filterable by minimum severity. |
 | `get_wifi_configuration` | Every SSID (main, guest, IoT, MLO) with its bands, plus each radio's channel settings. Passwords only with `include_passwords: true`. |
 | `list_clients` | Devices known to the mesh: name, MAC, IP, network, band, category, current traffic. Filter: `online_only`. |
 | `update_client` | Rename a device and optionally change its category. |
