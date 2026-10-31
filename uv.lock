@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 3
 requires-python = ">=3.14"
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -902,21 +902,20 @@ wheels = [
 
 [[package]]
 name = "tplink-deco-api"
-version = "2.0.0"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e6/3f/455e9308f0e0bac0c6f85ad19010abd51b5889509221ba616d7bd0e654bb/tplink_deco_api-2.0.0.tar.gz", hash = "sha256:e8cdff5a07440a27e77f704b769f0eeeee385e6b6f49ccdc1f1abb28476e703a", size = 126767, upload-time = "2026-10-14T14:00:39.257Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/83/188719ba09d62779b45e40c02db8495ced2503a855332b6a15453093dfbb/tplink_deco_api-2.1.0.tar.gz", hash = "sha256:bd9a6b524f7e7b812b537392f980ca61e3945465d74639214929933ecf8d94de", size = 129197, upload-time = "2026-10-31T22:02:08.506Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/39/8aede12c9d90d0c9d84510aba9091af76fab31123b326d4e0ceddd6620eb/tplink_deco_api-2.0.0-py3-none-any.whl", hash = "sha256:27b06840ae604cb8df8f2c986191c8188b8a547cf4f56b6065b83b9739c814e6", size = 33021, upload-time = "2026-10-14T14:00:38.187Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/29/cabb831c1a2282b56ee49a0466fadcee34f7933eedf3750e171c17459c6b/tplink_deco_api-2.1.0-py3-none-any.whl", hash = "sha256:d723aad8e3115214487ecf1326daf17f8f42e26f83f67da368445a0078f1cd74", size = 34536, upload-time = "2026-10-31T22:02:07.085Z" },
 ]
 
 [[package]]
 name = "tplink-deco-mcp-server"
 version = "1.0.0"
 source = { editable = "." }
-default-groups = ["dev", "lint"]
 dependencies = [
     { name = "mcp" },
     { name = "tplink-deco-api" },
@@ -935,7 +934,7 @@ lint = [
 [package.metadata]
 requires-dist = [
     { name = "mcp", specifier = ">=2.3.0" },
-    { name = "tplink-deco-api", specifier = ">=2.0.0" },
+    { name = "tplink-deco-api", specifier = ">=2.1.0" },
 ]
 
 [package.metadata.requires-dev]

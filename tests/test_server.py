@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 _READ_ONLY_TOOLS = {
     "list_deco_nodes",
     "get_router_performance",
+    "get_system_log",
     "get_internet_status",
     "get_wifi_configuration",
     "list_clients",

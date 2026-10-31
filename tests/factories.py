@@ -15,9 +15,12 @@ from tplink_deco_api import (
     IpInfo,
     IpStatus,
     LanDetails,
+    LogType,
     MloHost,
     Performance,
     SignalLevel,
+    SystemLogEntry,
+    SystemLogPage,
     WanDetails,
     WanInfo,
     WlanBackhaul,
@@ -88,6 +91,21 @@ def blocked_client(mac: str = "AA:BB:CC:DD:EE:09") -> BlockedClient:
 
 def reservation_table(*reservations: AddressReservation) -> AddressReservationTable:
     return AddressReservationTable(reservations=reservations, max_count=64)
+
+
+def log_types() -> list[LogType]:
+    return [LogType(name="ALL", value=8), LogType(name="NOTICE", value=5)]
+
+
+def system_log_page(page: int = 2) -> SystemLogPage:
+    entry = SystemLogEntry(
+        time="Mon Oct 26 13:57:02 2026",
+        facility="daemon",
+        level="notice",
+        source="pppd[18932]",
+        message="len < 0",
+    )
+    return SystemLogPage(page=page, total_pages=3, entries=(entry,))
 
 
 def performance() -> Performance:
