@@ -45,7 +45,7 @@ docker run --rm -e DECO_HOST=… -e DECO_PASSWORD=… -p 8000:8000 tplink-deco-m
 
 `ci.yml` runs the shared `python-lint`/`python-test` reusables from
 `roquerodrigo/workflows` plus a single-platform `docker` build, so a broken
-`Dockerfile` fails the PR instead of the release. `release-please` owns the
+`Dockerfile` fails the PR instead of the release. Release Autopilot owns the
 version in `pyproject.toml` and `uv.lock` and the `CHANGELOG.md`; merging its PR
 publishes to PyPI (`PYPI_API_TOKEN` secret) and pushes the multi-arch image to
 ghcr tagged `<version>`, `<major>.<minor>`, `<major>` and `latest`.

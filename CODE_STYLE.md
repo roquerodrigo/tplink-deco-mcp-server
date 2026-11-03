@@ -113,7 +113,7 @@ install once per clone with `pre-commit install`.
 ## Conventional commits
 
 All commits follow [Conventional Commits](https://www.conventionalcommits.org/),
-in **English**, which `release-please` parses to bump the version and generate
+in **English**, which Release Autopilot parses to bump the version and write
 `CHANGELOG.md`:
 
 | Type | Meaning | Bump |
@@ -141,10 +141,11 @@ in **English**, which `release-please` parses to bump the version and generate
 
 ## Releasing
 
-- `release-please` opens a release PR with the next version and
+- Release Autopilot keeps a release PR up to date with the next version and
   `CHANGELOG.md`. Merging it publishes to PyPI and pushes the Docker image to
   ghcr.
-- Don't manually edit the version in `pyproject.toml` — release-please owns it.
+- Don't manually edit the version in `pyproject.toml` — Release Autopilot
+  owns it.
 
 ## Testing
 
