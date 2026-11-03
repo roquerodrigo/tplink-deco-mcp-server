@@ -1,7 +1,8 @@
 name: Release
 
-# release-please grooms the release pull request and tags it; the tag is then
-# published to PyPI and to GitHub Container Registry under the same version.
+# Release Autopilot keeps the release pull request up to date and tags it; the
+# tag is then published to PyPI and to GitHub Container Registry under the
+# same version.
 #
 # The `workflow_run.event == 'push'` condition is what stops a pull request with
 # green CI from cutting a release.
@@ -12,37 +13,50 @@ on:
     types: [completed]
     branches: [main]
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 permissions: {}
 
 jobs:
   release:
+    name: Release
     if: >-
       github.event.workflow_run.event == 'push' &&
       github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
       pull-requests: write
-    uses: roquerodrigo/workflows/.github/workflows/release-please.yml@main
-    secrets:
-      release-token: ${{ secrets.RELEASE_PLEASE_PAT }}
-      anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - name: Release
+        id: release
+        uses: roquerodrigo/release-autopilot@latest
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
   publish:
     needs: release
-    if: needs.release.outputs.release-created == 'true'
+    if: needs.release.outputs.released == 'true'
     permissions:
       contents: read
     uses: roquerodrigo/workflows/.github/workflows/publish-pypi.yml@main
     with:
       package: tplink-deco-mcp-server
-      ref: ${{ needs.release.outputs.tag-name }}
+      ref: ${{ needs.release.outputs.tag }}
     secrets:
       pypi-token: ${{ secrets.PYPI_API_TOKEN }}
 
   publish-docker:
     name: Publish Docker image
     needs: release
-    if: needs.release.outputs.release-created == 'true'
+    if: needs.release.outputs.released == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -52,7 +66,7 @@ jobs:
       - name: Check out the released ref
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ needs.release.outputs.tag-name }}
+          ref: ${{ needs.release.outputs.tag }}
           persist-credentials: false
 
       - name: Set up QEMU
@@ -74,9 +88,9 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=semver,pattern={{version}},value=${{ needs.release.outputs.tag-name }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ needs.release.outputs.tag-name }}
-            type=semver,pattern={{major}},value=${{ needs.release.outputs.tag-name }}
+            type=semver,pattern={{version}},value=${{ needs.release.outputs.tag }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ needs.release.outputs.tag }}
+            type=semver,pattern={{major}},value=${{ needs.release.outputs.tag }}
             type=raw,value=latest
 
       - name: Build and push
