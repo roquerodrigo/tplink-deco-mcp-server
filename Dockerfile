@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM python:3.14-slim AS build
+FROM --platform=$BUILDPLATFORM python:3.15-slim AS build
 
 COPY --from=ghcr.io/astral-sh/uv:0.11.8 /uv /usr/local/bin/uv
 
@@ -11,7 +11,7 @@ RUN uv build --wheel --out-dir dist \
     && uv export --frozen --no-default-groups --no-emit-project --format requirements-txt \
         --output-file dist/requirements.txt
 
-FROM python:3.14-slim
+FROM python:3.15-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
