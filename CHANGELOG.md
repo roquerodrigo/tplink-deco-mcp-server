@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/roquerodrigo/tplink-deco-mcp-server/compare/v1.1.0...v1.1.1) (2026-11-16)
+
+### Improvements
+
+- Updated the tplink-deco-api library to version 2.1.1. ([#17](https://github.com/roquerodrigo/tplink-deco-mcp-server/pull/17))
+- The Docker image is now built on Python 3.15 instead of Python 3.14. ([#16](https://github.com/roquerodrigo/tplink-deco-mcp-server/pull/16))
+
 ## [1.1.0](https://github.com/roquerodrigo/tplink-deco-mcp-server/compare/v1.0.0...v1.1.0) (2026-10-31)
 
 
